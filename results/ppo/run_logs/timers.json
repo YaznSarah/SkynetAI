@@ -1,0 +1,42 @@
+{
+    "name": "root",
+    "metadata": {
+        "timer_format_version": "0.1.0",
+        "start_time_seconds": "1650778744",
+        "python_version": "3.9.1 (tags/v3.9.1:1e5d33e, Dec  7 2020, 17:08:21) [MSC v.1927 64 bit (AMD64)]",
+        "command_line_arguments": "D:\\Projects\\Unity\\SkynetProject\\venv\\Scripts\\mlagents-learn --force",
+        "mlagents_version": "0.29.0",
+        "mlagents_envs_version": "0.29.0",
+        "communication_protocol_version": "1.5.0",
+        "pytorch_version": "1.7.1+cu110",
+        "numpy_version": "1.21.2",
+        "end_time_seconds": "1650778805"
+    },
+    "total": 60.913115899999994,
+    "count": 1,
+    "self": 0.0019835999999955334,
+    "children": {
+        "run_training.setup": {
+            "total": 0.024145900000000053,
+            "count": 1,
+            "self": 0.024145900000000053
+        },
+        "TrainerController.start_learning": {
+            "total": 60.8869864,
+            "count": 1,
+            "self": 0.00010019999999855145,
+            "children": {
+                "TrainerController._reset_env": {
+                    "total": 60.886872,
+                    "count": 1,
+                    "self": 60.886872
+                },
+                "TrainerController._save_models": {
+                    "total": 1.4200000002517754e-05,
+                    "count": 1,
+                    "self": 1.4200000002517754e-05
+                }
+            }
+        }
+    }
+}
