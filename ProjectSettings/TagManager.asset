@@ -5,6 +5,11 @@ TagManager:
   serializedVersion: 2
   tags:
   - Base
+  - Wall
+  - Puck
+  - P1_Win
+  - P2_Win
+  - Opponent
   layers:
   - Default
   - TransparentFX
