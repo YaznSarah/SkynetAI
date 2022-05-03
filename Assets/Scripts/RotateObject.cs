@@ -10,7 +10,6 @@ public class RotateObject : MonoBehaviour
         
     }
 
-    float angle = 0;
     // Update is called once per frame
     void Update()
     {

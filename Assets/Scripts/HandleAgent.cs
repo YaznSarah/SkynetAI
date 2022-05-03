@@ -5,14 +5,25 @@ using UnityEngine;
 using Unity.MLAgents;
 using Unity.MLAgents.Actuators;
 using Unity.MLAgents.Sensors;
+using Unity.VisualScripting;
 
-public class DefendGoalAgent : Agent
+public class HandleAgent : Agent
 {
     [SerializeField] private Transform targetTransform;
-
+    [SerializeField] private float _handleSpeed = 14f;
+    private float _totalDistance;
+    private float _time;
     public override void OnEpisodeBegin()
     {
-        transform.localPosition = new Vector3(-0.0138f, .072f, 6.371f);
+        targetTransform.gameObject.GetComponent<ResetObjects>().Reset();
+        _totalDistance = 0;
+        _time = 30f;
+        if (gameObject.CompareTag("Opponent"))
+        {
+            transform.localPosition = new Vector3(-0.0138f, .072f, 6.371f);
+        }
+        else
+            transform.localPosition = new Vector3(-.0138f, .072f, -6.371f);
     }
 
     public override void CollectObservations(VectorSensor sensor)
@@ -24,18 +35,16 @@ public class DefendGoalAgent : Agent
     private void LoadActions(float direction)
     {
         Rigidbody rigidBody = transform.GetComponent<Rigidbody>();
-        OpponentInput opponentInput = GetComponent<OpponentInput>();
-    
-        Vector3 maxSpeed = new Vector3(opponentInput.HandleSpeed, 0, opponentInput.HandleSpeed);
+        Vector3 maxSpeed = new Vector3(14f, 0, 14f);
         switch (direction)
         {
             case 0:
-                if (Mathf.Abs(rigidBody.velocity.x) < opponentInput.HandleSpeed)
+                if (Mathf.Abs(rigidBody.velocity.x) < _handleSpeed)
                     rigidBody.AddForce(-60, 0, 0, ForceMode.Acceleration);
                 break;
             case 1:
                 if (rigidBody.velocity.x < maxSpeed.x)
-                    rigidBody.AddForce(60, 0, 0, ForceMode.Acceleration);
+                    rigidBody.AddForce(60, 0, 0, ForceMode.Acceleration);       
                 break;
             case 2:
                 if (Mathf.Abs(rigidBody.velocity.z) < maxSpeed.z)
@@ -60,25 +69,52 @@ public class DefendGoalAgent : Agent
         rigidBody.AddForce(0, 0, moveSpeed * moveDown, ForceMode.Acceleration);*/
     }
 
-    /*
+    private void Update()
+    {
+         float distance = Vector3.Distance(transform.localPosition, targetTransform.localPosition);
+
+        _totalDistance += distance;
+        
+        Debug.Log(_totalDistance);
+        
+        SetReward(1 / _totalDistance); 
+        
+         if (gameObject.CompareTag("Player") && WinTrigger.PlayerScoredLast)
+         {
+            SetReward(10f);    
+         }
+         else if (gameObject.CompareTag("Opponent") && WinTrigger.OpponentScoredLast)
+         {
+             SetReward(10f);
+         }
+         
+        Rigidbody targetRigid = targetTransform.gameObject.GetComponent<Rigidbody>();
+        if (_time > 0)
+        {
+            _time -= Time.deltaTime;
+        }
+        else if (_time < 0 && targetRigid.velocity.magnitude < 0.5f)
+        {
+            EndEpisode();
+        }
+        SetReward(-.005f);
+
+    }
     public override void Heuristic(in ActionBuffers actionsOut)
     {
         ActionSegment<float> continuousActions = actionsOut.ContinuousActions;
+        
     }
-    */
-
-    private void OnTriggerEnter(Collider other)
+    private void OnCollisionEnter(Collision other)
     {
         if (other.gameObject.CompareTag("Puck"))
         {
-            SetReward(1f);
-            EndEpisode();
+            SetReward(2f);
+            _time = 30f;
         }
-
-        if (other.gameObject.CompareTag("Wall"))
+        else if (other.gameObject.CompareTag("Wall"))
         {
-            SetReward(-1f);
-            EndEpisode();
+            SetReward(-2f);
         }
     }
 }

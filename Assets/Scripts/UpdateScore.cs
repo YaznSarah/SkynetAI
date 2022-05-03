@@ -7,6 +7,7 @@ public class UpdateScore : MonoBehaviour
 {
     Text text;
 
+
     // Start is called before the first frame update
     void Start()
     {
@@ -17,8 +18,12 @@ public class UpdateScore : MonoBehaviour
     void Update()
     {
         if (this.name == "Score_P1")
+        {
             text.text = "Player 1: " + WinTrigger.ScoreP1;
+        }
         else if (this.name == "Score_P2")
+        {
             text.text = "Player 2: " + WinTrigger.ScoreP2;
+        }
     }
 }

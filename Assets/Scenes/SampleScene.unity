@@ -2870,12 +2870,15 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1021143969}
+  - component: {fileID: 1021143981}
+  - component: {fileID: 1021143975}
+  - component: {fileID: 1021143980}
   - component: {fileID: 1021143973}
+  - component: {fileID: 1021143982}
   - component: {fileID: 1021143972}
   - component: {fileID: 1021143971}
   - component: {fileID: 1021143970}
   - component: {fileID: 1021143974}
-  - component: {fileID: 1021143975}
   - component: {fileID: 1021143976}
   - component: {fileID: 1021143979}
   - component: {fileID: 1021143978}
@@ -3226,6 +3229,68 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a1b07337f140424bbe7791efa41eee4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1021143980
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1021143968}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 536a057531fcfe240816443865a5105b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  agentParameters:
+    maxStep: 0
+  hasUpgradedFromAgentParameters: 1
+  MaxStep: 1000
+  targetTransform: {fileID: 663107635}
+  _handleSpeed: 14
+--- !u!114 &1021143981
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1021143968}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5d1c4e0b1822b495aa52bc52839ecb30, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_BrainParameters:
+    VectorObservationSize: 6
+    NumStackedVectorObservations: 1
+    m_ActionSpec:
+      m_NumContinuousActions: 0
+      BranchSizes: 04000000
+    VectorActionSize: 04000000
+    VectorActionDescriptions: []
+    VectorActionSpaceType: 0
+    hasUpgradedBrainParametersWithActionSpec: 1
+  m_Model: {fileID: 0}
+  m_InferenceDevice: 0
+  m_BehaviorType: 0
+  m_BehaviorName: HitPuck
+  TeamId: 0
+  m_UseChildSensors: 1
+  m_UseChildActuators: 1
+  m_ObservableAttributeHandling: 0
+--- !u!114 &1021143982
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1021143968}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3a5c9d521e5ef4759a8246a07d52221e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  DecisionPeriod: 5
+  TakeActionsBetweenDecisions: 1
 --- !u!1001 &1036120527
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3522,13 +3587,13 @@ GameObject:
   - component: {fileID: 1155117728}
   - component: {fileID: 1155117739}
   - component: {fileID: 1155117740}
+  - component: {fileID: 1155117734}
   - component: {fileID: 1155117741}
   - component: {fileID: 1155117732}
   - component: {fileID: 1155117731}
   - component: {fileID: 1155117730}
   - component: {fileID: 1155117729}
   - component: {fileID: 1155117733}
-  - component: {fileID: 1155117734}
   - component: {fileID: 1155117735}
   - component: {fileID: 1155117736}
   - component: {fileID: 1155117738}
@@ -3924,8 +3989,9 @@ MonoBehaviour:
   agentParameters:
     maxStep: 0
   hasUpgradedFromAgentParameters: 1
-  MaxStep: 0
+  MaxStep: 1000
   targetTransform: {fileID: 663107635}
+  _handleSpeed: 14
 --- !u!114 &1155117741
 MonoBehaviour:
   m_ObjectHideFlags: 0
