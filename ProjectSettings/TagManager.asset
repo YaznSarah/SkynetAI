@@ -10,6 +10,8 @@ TagManager:
   - P1_Win
   - P2_Win
   - Opponent
+  - CenterLine
+  - WinWall
   layers:
   - Default
   - TransparentFX

@@ -10,14 +10,26 @@ using Unity.VisualScripting;
 public class HandleAgent : Agent
 {
     [SerializeField] private Transform targetTransform;
-    [SerializeField] private float _handleSpeed = 14f;
+    [SerializeField] private float _handleSpeed = 10f;
+    [SerializeField] private Transform opponentTransform;
     private float _totalDistance;
     private float _time;
+    private float m_Existential;
+    private float _initialDistance;
+
+    public override void Initialize()
+    {
+        m_Existential = -.002f;
+        _initialDistance = Vector3.Distance(transform.position, targetTransform.position);
+    }
+
     public override void OnEpisodeBegin()
     {
         targetTransform.gameObject.GetComponent<ResetObjects>().Reset();
+        opponentTransform.gameObject.GetComponent<ResetObjects>().Reset();
         _totalDistance = 0;
         _time = 30f;
+
         if (gameObject.CompareTag("Opponent"))
         {
             transform.localPosition = new Vector3(-0.0138f, .072f, 6.371f);
@@ -35,7 +47,7 @@ public class HandleAgent : Agent
     private void LoadActions(float direction)
     {
         Rigidbody rigidBody = transform.GetComponent<Rigidbody>();
-        Vector3 maxSpeed = new Vector3(14f, 0, 14f);
+        Vector3 maxSpeed = new Vector3(_handleSpeed, 0, _handleSpeed);
         switch (direction)
         {
             case 0:
@@ -44,7 +56,7 @@ public class HandleAgent : Agent
                 break;
             case 1:
                 if (rigidBody.velocity.x < maxSpeed.x)
-                    rigidBody.AddForce(60, 0, 0, ForceMode.Acceleration);       
+                    rigidBody.AddForce(60, 0, 0, ForceMode.Acceleration);
                 break;
             case 2:
                 if (Mathf.Abs(rigidBody.velocity.z) < maxSpeed.z)
@@ -54,8 +66,7 @@ public class HandleAgent : Agent
                 if (rigidBody.velocity.z < maxSpeed.z)
                     rigidBody.AddForce(0, 0, 60, ForceMode.Acceleration);
                 break;
-        }       
-
+        }
     }
 
     public override void OnActionReceived(ActionBuffers actions)
@@ -71,23 +82,42 @@ public class HandleAgent : Agent
 
     private void Update()
     {
-         float distance = Vector3.Distance(transform.localPosition, targetTransform.localPosition);
+        float distance = Vector3.Distance(transform.localPosition, targetTransform.localPosition);
 
         _totalDistance += distance;
-        
-        Debug.Log(_totalDistance);
-        
-        SetReward(1 / _totalDistance); 
-        
-         if (gameObject.CompareTag("Player") && WinTrigger.PlayerScoredLast)
-         {
-            SetReward(10f);    
-         }
-         else if (gameObject.CompareTag("Opponent") && WinTrigger.OpponentScoredLast)
-         {
-             SetReward(10f);
-         }
-         
+
+        AddReward((_initialDistance / _totalDistance) - 1);
+
+        if (gameObject.CompareTag("Player") && WinTrigger.PlayerScoredLast) // if player scored reward player
+        {
+            AddReward(10000f);
+            Debug.Log("Player scored");
+            WinTrigger.ResetBools();
+            EndEpisode();
+        }
+
+        else if (gameObject.CompareTag("Opponent") && WinTrigger.OpponentScoredLast)
+        {
+            AddReward(10000f);
+            Debug.Log("Opponent scored");
+            WinTrigger.ResetBools();
+            EndEpisode();
+        }
+
+        /*else if (gameObject.CompareTag("Opponent") && WinTrigger.PlayerScoredLast)
+                {
+                    AddReward(-10000f);
+                    Debug.Log("Player scored");
+                    WinTrigger.ResetBools();
+                    EndEpisode();
+                }
+                else if (gameObject.CompareTag("Player") && WinTrigger.OpponentScoredLast)
+                {
+                    AddReward(-10000f);
+                    Debug.Log("Opponent scored");
+                    WinTrigger.ResetBools();
+                    EndEpisode();
+                }*/
         Rigidbody targetRigid = targetTransform.gameObject.GetComponent<Rigidbody>();
         if (_time > 0)
         {
@@ -97,24 +127,47 @@ public class HandleAgent : Agent
         {
             EndEpisode();
         }
-        SetReward(-.005f);
 
+        AddReward(m_Existential);
     }
+
     public override void Heuristic(in ActionBuffers actionsOut)
     {
-        ActionSegment<float> continuousActions = actionsOut.ContinuousActions;
-        
+        var discreteActionsOut = actionsOut.DiscreteActions;
+        if (gameObject.CompareTag("Player"))
+        {
+            if (Input.GetKey(KeyCode.W))
+            {
+                discreteActionsOut[0] = 0;
+            }
+
+            if (Input.GetKey(KeyCode.S))
+            {
+                discreteActionsOut[0] = 1;
+            }
+
+            if (Input.GetKey(KeyCode.A))
+            {
+                discreteActionsOut[0] = 2;
+            }
+
+            if (Input.GetKey(KeyCode.D))
+            {
+                discreteActionsOut[0] = 3;
+            }
+        }
     }
+
     private void OnCollisionEnter(Collision other)
     {
         if (other.gameObject.CompareTag("Puck"))
         {
-            SetReward(2f);
+            AddReward(750f);
             _time = 30f;
         }
-        else if (other.gameObject.CompareTag("Wall"))
+        else if (other.gameObject.CompareTag("Wall") || other.gameObject.CompareTag("CenterLine"))
         {
-            SetReward(-2f);
+            AddReward(-500f);
         }
     }
 }

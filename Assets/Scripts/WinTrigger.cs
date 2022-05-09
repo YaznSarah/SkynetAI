@@ -16,6 +16,12 @@ public class WinTrigger : MonoBehaviour
         rb = GetComponent<Rigidbody>();
     }
 
+    public static void ResetBools()
+    {
+        PlayerScoredLast = false;
+        OpponentScoredLast = false;
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Puck"))

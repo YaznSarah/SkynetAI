@@ -46,7 +46,7 @@ public class ResetObjects : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.CompareTag("P1_Win") || other.gameObject.CompareTag("P2_Win"))
+        if ((other.gameObject.CompareTag("P1_Win") || other.gameObject.CompareTag("P2_Win")) && gameObject.CompareTag("Puck"))
         {
             Reset();
         }
