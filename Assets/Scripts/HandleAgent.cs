@@ -44,6 +44,12 @@ public class HandleAgent : Agent
         sensor.AddObservation(targetTransform.position);
     }
 
+    public override void OnActionReceived(ActionBuffers actions)
+    {
+        float moveDirection = actions.DiscreteActions[0];
+        LoadActions(moveDirection);
+    }
+
     private void LoadActions(float direction)
     {
         Rigidbody rigidBody = transform.GetComponent<Rigidbody>();
@@ -69,16 +75,6 @@ public class HandleAgent : Agent
         }
     }
 
-    public override void OnActionReceived(ActionBuffers actions)
-    {
-        float moveDirection = actions.DiscreteActions[0];
-        LoadActions(moveDirection);
-
-        /*
-        rigidBody.AddForce(moveSpeed * moveUp, 0, 0, ForceMode.Acceleration);
-        rigidBody.AddForce(moveSpeed * moveDown, 0, 0, ForceMode.Acceleration);
-        rigidBody.AddForce(0, 0, moveSpeed * moveDown, ForceMode.Acceleration);*/
-    }
 
     private void Update()
     {
@@ -119,14 +115,14 @@ public class HandleAgent : Agent
                     EndEpisode();
                 }*/
         Rigidbody targetRigid = targetTransform.gameObject.GetComponent<Rigidbody>();
-        /*if (_time > 0)
+        if (_time > 0)
         {
             _time -= Time.deltaTime;
         }
         else if (_time < 0 && targetRigid.velocity.magnitude < 0.5f)
         {
             EndEpisode();
-        }*/
+        }
 
         AddReward(m_Existential);
     }
