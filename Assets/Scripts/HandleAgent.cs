@@ -119,14 +119,14 @@ public class HandleAgent : Agent
                     EndEpisode();
                 }*/
         Rigidbody targetRigid = targetTransform.gameObject.GetComponent<Rigidbody>();
-        if (_time > 0)
+        /*if (_time > 0)
         {
             _time -= Time.deltaTime;
         }
         else if (_time < 0 && targetRigid.velocity.magnitude < 0.5f)
         {
             EndEpisode();
-        }
+        }*/
 
         AddReward(m_Existential);
     }
@@ -167,7 +167,7 @@ public class HandleAgent : Agent
         }
         else if (other.gameObject.CompareTag("Wall") || other.gameObject.CompareTag("CenterLine"))
         {
-            AddReward(-500f);
+            AddReward(-100f);
         }
     }
 }
