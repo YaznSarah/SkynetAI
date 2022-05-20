@@ -1,0 +1,30 @@
+{
+    "HitPuck": {
+        "elo": 1202.2649123907606,
+        "checkpoints": [
+            {
+                "steps": 1711408,
+                "file_path": "results\\NewLongTest\\HitPuck\\HitPuck-1711408.onnx",
+                "reward": -4482.015932597765,
+                "creation_time": 1652073474.7759244,
+                "auxillary_file_paths": [
+                    "results\\NewLongTest\\HitPuck\\HitPuck-1711408.pt"
+                ]
+            }
+        ],
+        "final_checkpoint": {
+            "steps": 1711408,
+            "file_path": "results\\NewLongTest\\HitPuck.onnx",
+            "reward": -4482.015932597765,
+            "creation_time": 1652073474.7759244,
+            "auxillary_file_paths": [
+                "results\\NewLongTest\\HitPuck\\HitPuck-1711408.pt"
+            ]
+        }
+    },
+    "metadata": {
+        "stats_format_version": "0.3.0",
+        "mlagents_version": "0.29.0",
+        "torch_version": "1.7.1+cu110"
+    }
+}

@@ -12078,6 +12078,10 @@ PrefabInstance:
       propertyPath: m_BehaviorType
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 2395229763192904537, guid: e1a13c777e020a144aa934b07d8022c9, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2395229763305357733, guid: e1a13c777e020a144aa934b07d8022c9, type: 3}
       propertyPath: m_RootOrder
       value: 1

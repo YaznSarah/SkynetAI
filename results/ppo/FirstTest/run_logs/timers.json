@@ -1,0 +1,47 @@
+{
+    "name": "root",
+    "metadata": {
+        "timer_format_version": "0.1.0",
+        "start_time_seconds": "1651903230",
+        "python_version": "3.9.1 (tags/v3.9.1:1e5d33e, Dec  7 2020, 17:08:21) [MSC v.1927 64 bit (AMD64)]",
+        "command_line_arguments": "D:\\Projects\\Unity\\SkynetProject\\venv\\Scripts\\mlagents-learn config.yaml --run-id=FirstTest",
+        "mlagents_version": "0.29.0",
+        "mlagents_envs_version": "0.29.0",
+        "communication_protocol_version": "1.5.0",
+        "pytorch_version": "1.11.0+cpu",
+        "numpy_version": "1.21.2",
+        "end_time_seconds": "1651903231"
+    },
+    "total": 1.2892789000000002,
+    "count": 1,
+    "self": 0.003910600000000208,
+    "children": {
+        "run_training.setup": {
+            "total": 0.07026660000000007,
+            "count": 1,
+            "self": 0.07026660000000007
+        },
+        "TrainerController.start_learning": {
+            "total": 1.2151017,
+            "count": 1,
+            "self": 0.00030960000000002097,
+            "children": {
+                "TrainerController._reset_env": {
+                    "total": 1.2147842,
+                    "count": 1,
+                    "self": 1.2147842
+                },
+                "trainer_threads": {
+                    "total": 8.000000000230045e-07,
+                    "count": 1,
+                    "self": 8.000000000230045e-07
+                },
+                "TrainerController._save_models": {
+                    "total": 7.0999999999266095e-06,
+                    "count": 1,
+                    "self": 7.0999999999266095e-06
+                }
+            }
+        }
+    }
+}

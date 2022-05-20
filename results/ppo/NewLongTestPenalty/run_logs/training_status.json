@@ -1,0 +1,57 @@
+{
+    "HitPuck": {
+        "elo": 1246.6472311413174,
+        "checkpoints": [
+            {
+                "steps": 5752269,
+                "file_path": "results\\NewLongTestPenalty\\HitPuck\\HitPuck-5752269.onnx",
+                "reward": 10932.547902757122,
+                "creation_time": 1652119738.342048,
+                "auxillary_file_paths": [
+                    "results\\NewLongTestPenalty\\HitPuck\\HitPuck-5752269.pt"
+                ]
+            },
+            {
+                "steps": 7841387,
+                "file_path": "results\\NewLongTestPenalty\\HitPuck\\HitPuck-7841387.onnx",
+                "reward": 10450.507021506628,
+                "creation_time": 1652124225.3092296,
+                "auxillary_file_paths": [
+                    "results\\NewLongTestPenalty\\HitPuck\\HitPuck-7841387.pt"
+                ]
+            },
+            {
+                "steps": 11522078,
+                "file_path": "results\\NewLongTestPenalty\\HitPuck\\HitPuck-11522078.onnx",
+                "reward": 9992.16365870723,
+                "creation_time": 1652131688.2066512,
+                "auxillary_file_paths": [
+                    "results\\NewLongTestPenalty\\HitPuck\\HitPuck-11522078.pt"
+                ]
+            },
+            {
+                "steps": 12877115,
+                "file_path": "results\\NewLongTestPenalty\\HitPuck\\HitPuck-12877115.onnx",
+                "reward": 11533.939211851877,
+                "creation_time": 1652138908.7382536,
+                "auxillary_file_paths": [
+                    "results\\NewLongTestPenalty\\HitPuck\\HitPuck-12877115.pt"
+                ]
+            }
+        ],
+        "final_checkpoint": {
+            "steps": 12877115,
+            "file_path": "results\\NewLongTestPenalty\\HitPuck.onnx",
+            "reward": 11533.939211851877,
+            "creation_time": 1652138908.7382536,
+            "auxillary_file_paths": [
+                "results\\NewLongTestPenalty\\HitPuck\\HitPuck-12877115.pt"
+            ]
+        }
+    },
+    "metadata": {
+        "stats_format_version": "0.3.0",
+        "mlagents_version": "0.29.0",
+        "torch_version": "1.7.1+cu110"
+    }
+}

@@ -5,19 +5,19 @@ using UnityEngine;
 
 public class ResetObjects : MonoBehaviour
 {
-    Vector3 initPosition;
-    Vector3 initVelocity;
-    Quaternion initRotation;
-    Rigidbody rigidBody;
+    private Vector3 _initPosition;
+    private Vector3 _initVelocity;
+    private Quaternion _initRotation;
+    private Rigidbody _rigidBody;
 
     // Start is called before the first frame update
     void Start()
     {
-        rigidBody = GetComponent<Rigidbody>();
+        _rigidBody = GetComponent<Rigidbody>();
 
-        initPosition = rigidBody.position;
-        initRotation = rigidBody.rotation;
-        initVelocity = rigidBody.velocity;
+        _initPosition = _rigidBody.position;
+        _initRotation = _rigidBody.rotation;
+        _initVelocity = _rigidBody.velocity;
     }
 
     // Update is called once per frame
@@ -26,14 +26,16 @@ public class ResetObjects : MonoBehaviour
         if (Input.GetKey(KeyCode.R))
         {
             Reset();
+            WinTrigger.ScoreP1 = 0;
+            WinTrigger.ScoreP2 = 0;
         }
     }
 
     public void Reset()
     {
-        transform.position = initPosition;
-        transform.rotation = initRotation;
-        rigidBody.velocity = initVelocity;
+        transform.position = _initPosition;
+        transform.rotation = _initRotation;
+        _rigidBody.velocity = _initVelocity;
     }
 
     private void OnCollisionEnter(Collision other)

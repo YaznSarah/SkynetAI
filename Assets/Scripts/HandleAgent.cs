@@ -65,7 +65,7 @@ public class HandleAgent : Agent
                     rigidBody.AddForce(60, 0, 0, ForceMode.Acceleration);
                 break;
             case 2:
-                if (Mathf.Abs(rigidBody.velocity.z) < maxSpeed.z)
+                if (Mathf.Abs(rigidBody.velocity.z) < _handleSpeed)
                     rigidBody.AddForce(0, 0, -60, ForceMode.Acceleration);
                 break;
             case 3:
@@ -164,6 +164,6 @@ public class HandleAgent : Agent
         else if (other.gameObject.CompareTag("Wall") || other.gameObject.CompareTag("CenterLine"))
         {
             AddReward(-100f);
-        }
+        }   
     }
 }
